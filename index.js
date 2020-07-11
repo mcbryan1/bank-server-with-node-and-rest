@@ -8,6 +8,25 @@ const server = express();
 server.use(bodyParser.json());
 
 
+//Database
+const bankDB = [
+
+];
+
+
+//Models
+class BankModel{
+    constructor({name, branch, location, phone, address, accountNumber}){
+        this.name = name;
+        this.branch = branch;
+        this.location = location,
+        this.phone = phone,
+        this.address = address,
+        this.accountNumber = accountNumber
+    }
+}
+
+
 //Controllers
 const listBanksController =(req, res)=>{
 
