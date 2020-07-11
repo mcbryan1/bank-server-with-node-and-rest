@@ -7,7 +7,7 @@ const server = express();
 server.use(bodyParser.json());
 
 //Database
-const bankDB = [];
+const bankDb = [];
 
 //Models
 class BankModel {
@@ -20,13 +20,19 @@ class BankModel {
       (this.accountNumber = accountNumber);
   }
   save() {
-    bankDB.push(this);
+    bankDb.push(this);
     return this;
+  }
+  static all() {
+    return bankDb;
   }
 }
 
 //Controllers
-const listBanksController = (req, res) => {};
+const listBanksController = (req, res) => {
+  const banks = BankModel.all();
+  res.json({ data: banks });
+};
 const createBankController = (req, res) => {
   const { name, branch, location, phone, address, accountNumber } = req.body;
   const bank = new BankModel({
@@ -38,7 +44,7 @@ const createBankController = (req, res) => {
     accountNumber,
   });
   bank.save();
-  res.json({message: "Create Successful", data: bank})
+  res.json({ message: "Create Successful", data: bank });
 };
 const updateBankController = (req, res) => {};
 const deleteBankController = (req, res) => {};
