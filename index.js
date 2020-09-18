@@ -6,7 +6,7 @@ const server = express();
 const {
   listBanksController,
   createBankController,
-  // updateBankController,
+  updateBankController,
   // deleteBankController,
 } = require("./controllers");
 
@@ -16,7 +16,7 @@ server.use(bodyParser.json());
 //Routes
 server.get("/bank/:id?", listBanksController);
 server.post("/bank", createBankController);
-// server.put("/bank", updateBankController);
+server.put("/bank", updateBankController);
 // server.delete("/bank", deleteBankController);
 
 //Connect To database and Listening To Server

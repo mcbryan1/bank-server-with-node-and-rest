@@ -39,18 +39,25 @@ const createBankController = (req, res) => {
 };
 
 //Update Bank Details
-// const updateBankController = (req, res) => {
-//   const { name, branch, location, phone, address, accountNumber } = req.body;
-//   const updateBank = BankModel.update({
-//     name,
-//     branch,
-//     location,
-//     phone,
-//     address,
-//     accountNumber,
-//   });
-//   res.json({ message: "Update Successful", data: updateBank });
-// };
+const updateBankController = (req, res) => {
+  const { id, name, branch, location, phone, address, accountNumber } = req.body;
+  BankModel.findById(id)
+    .then((bank) => {
+      if (bank) {
+        bank.name = name;
+        bank.branch = branch;
+        bank.location = location;
+        bank.phone = phone;
+        bank.address = address;
+        bank.accountNumber = accountNumber;
+        bank.save();
+        res.json({ message: "Update Successful", data: bank });
+      }
+      res.json({ message: "Document Cannot Be Found", data: bank });
+    })
+    .catch((error) => console.log(error));
+
+};
 
 //Delete Banks
 // const deleteBankController = (req, res) => {
@@ -62,6 +69,6 @@ const createBankController = (req, res) => {
 module.exports = {
   listBanksController,
   createBankController,
-  // updateBankController,
+  updateBankController,
   // deleteBankController
 };
