@@ -3,11 +3,20 @@ let BankModel = require("./model");
 //Controllers
 // List all Banks
 const listBanksController = (req, res) => {
-  BankModel.find()
-    .then((banks) => {
-      res.json({ data: banks });
-    })
-    .catch((error) => console.log(error));
+  const { id } = req.params;
+  if (id) {
+    BankModel.find({ _id: id })
+      .then((banks) => {
+        res.json({ data: banks });
+      })
+      .catch((error) => console.log(error));
+  } else {
+    BankModel.find({})
+      .then((banks) => {
+        res.json({ data: banks });
+      })
+      .catch((error) => console.log(error));
+  }
 };
 
 //Create All Banks

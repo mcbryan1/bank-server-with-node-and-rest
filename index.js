@@ -14,7 +14,7 @@ const {
 server.use(bodyParser.json());
 
 //Routes
-server.get("/bank", listBanksController);
+server.get("/bank/:id?", listBanksController);
 server.post("/bank", createBankController);
 // server.put("/bank", updateBankController);
 // server.delete("/bank", deleteBankController);
