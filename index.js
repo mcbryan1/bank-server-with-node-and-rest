@@ -7,7 +7,7 @@ const {
   listBanksController,
   createBankController,
   updateBankController,
-  // deleteBankController,
+  deleteBankController,
 } = require("./controllers");
 
 //Middleware
@@ -17,7 +17,7 @@ server.use(bodyParser.json());
 server.get("/bank/:id?", listBanksController);
 server.post("/bank", createBankController);
 server.put("/bank", updateBankController);
-// server.delete("/bank", deleteBankController);
+server.delete("/bank", deleteBankController);
 
 //Connect To database and Listening To Server
 mongoose

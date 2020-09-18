@@ -40,7 +40,15 @@ const createBankController = (req, res) => {
 
 //Update Bank Details
 const updateBankController = (req, res) => {
-  const { id, name, branch, location, phone, address, accountNumber } = req.body;
+  const {
+    id,
+    name,
+    branch,
+    location,
+    phone,
+    address,
+    accountNumber,
+  } = req.body;
   BankModel.findById(id)
     .then((bank) => {
       if (bank) {
@@ -56,19 +64,22 @@ const updateBankController = (req, res) => {
       res.json({ message: "Document Cannot Be Found", data: bank });
     })
     .catch((error) => console.log(error));
-
 };
 
 //Delete Banks
-// const deleteBankController = (req, res) => {
-//   const { name } = req.body;
-//   const deletedBank = BankModel.delete({ name });
-//   res.json({ message: "Bank Deleted", data: deletedBank });
-// };
+const deleteBankController = (req, res) => {
+  const { id } = req.body;
+  BankModel.findByIdAndRemove(id).then((deletedBank) => {
+    if (deletedBank) {
+      res.json({ message: "Bank Deleted", data: deletedBank });
+    }
+    res.json({ message: "Bank Not Found", data: deletedBank });
+  });
+};
 
 module.exports = {
   listBanksController,
   createBankController,
   updateBankController,
-  // deleteBankController
+  deleteBankController,
 };
