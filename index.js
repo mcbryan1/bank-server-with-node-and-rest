@@ -1,5 +1,6 @@
 //Setting Up Express
 const express = require("express");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const server = express();
 const {
@@ -18,5 +19,12 @@ server.post("/bank", createBankController);
 server.put("/bank", updateBankController);
 server.delete("/bank", deleteBankController);
 
-//Listening To Server
-server.listen(3000, () => console.log("Server Is Ready For Any Request"));
+//Connect To database and Listening To Server
+mongoose
+  .connect(
+    "mongodb+srv://codetrainUser:Nnmvdr7uO5438KW4@cluster0.mzmfo.mongodb.net/codetrain?retryWrites=true&w=majority"
+  )
+  .then((result) => {
+    server.listen(3000, () => console.log("Server Is Ready For Any Request"));
+  })
+  .catch((error) => console.log(error));
