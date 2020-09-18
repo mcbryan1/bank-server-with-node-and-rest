@@ -6,6 +6,7 @@ const BankSchema = new mongoose.Schema({
   address: String,
   accountNumber: String,
   branch: String,
+  phone: String
 });
 const BankModel = mongoose.model("Banks", BankSchema);
 
