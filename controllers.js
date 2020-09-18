@@ -1,11 +1,14 @@
 let BankModel = require("./model");
 
 //Controllers
-//List all Banks
-// const listBanksController = (req, res) => {
-//     const banks = BankModel.all();
-//     res.json({ data: banks });
-//   };
+// List all Banks
+const listBanksController = (req, res) => {
+  BankModel.find()
+    .then((banks) => {
+      res.json({ data: banks });
+    })
+    .catch((error) => console.log(error));
+};
 
 //Create All Banks
 const createBankController = (req, res) => {
@@ -48,7 +51,7 @@ const createBankController = (req, res) => {
 // };
 
 module.exports = {
-  // listBanksController,
+  listBanksController,
   createBankController,
   // updateBankController,
   // deleteBankController
